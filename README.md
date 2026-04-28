@@ -47,6 +47,7 @@ services:
       - PUID=1000
       - PGID=1000
       - TZ=UTC
+      - SSH_PORT=22
     volumes:
       - "/path/to/containers/forgejo:/config"
     ports:
@@ -64,6 +65,7 @@ podman run -d --name forgejo \
   -e PUID=1000 \
   -e PGID=1000 \
   -e TZ=UTC \
+  -e SSH_PORT=22 \
   -v /path/to/containers/forgejo:/config \
   ghcr.io/daemonless/forgejo:latest
 ```
@@ -81,6 +83,7 @@ podman run -d --name forgejo \
       PUID: "1000"
       PGID: "1000"
       TZ: "UTC"
+      SSH_PORT: "22"
     ports:
       - "3000:3000"
       - "2222:2222"
@@ -97,6 +100,7 @@ podman run -d --name forgejo \
 | `PUID` | `1000` | User ID for the application process |
 | `PGID` | `1000` | Group ID for the application process |
 | `TZ` | `UTC` | Timezone for the container |
+| `SSH_PORT` | `22` | Port for sshd |
 
 ### Volumes
 

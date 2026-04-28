@@ -34,7 +34,7 @@ ROOT_URL = http://localhost:3000/
 SSH_DOMAIN = %(DOMAIN)s
 DISABLE_SSH = false
 SSH_PORT = 22
-LFS_START_SERVER = true
+LFS_START_SERVER = false
 OFFLINE_MODE = true
 
 [database]
@@ -44,6 +44,7 @@ DB_TYPE = sqlite3
 [log]
 MODE = console
 LEVEL = info
+ROOT_PATH = /config/log
 
 [security]
 INSTALL_LOCK = false

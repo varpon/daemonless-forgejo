@@ -17,6 +17,7 @@ x-daemonless:
       PUID: "User ID for the application process"
       PGID: "Group ID for the application process"
       TZ: "Timezone for the container"
+      SSH_PORT: "Port for sshd"
     volumes:
       /config: "Configuration, repositories, and data directory"
     ports:
@@ -33,6 +34,7 @@ services:
       - PUID=1000
       - PGID=1000
       - TZ=UTC
+      - SSH_PORT=22 # optional
 
     volumes:
       - /path/to/containers/forgejo:/config
