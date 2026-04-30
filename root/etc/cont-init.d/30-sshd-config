@@ -1,5 +1,10 @@
 #!/bin/sh
 
+# Setup git user with the same UID:GID as the bsd user so that we can
+# use git as the username in clone URLs
+pw useradd -o -n git -d /config -s sh -u 1000 -g 1000 -w no -c "git service user"
+
+
 if [ ! -d /config/ssh ]; then
     mkdir -p /config/ssh
 fi

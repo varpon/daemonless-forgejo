@@ -55,7 +55,7 @@ FROM ghcr.io/daemonless/base:${BASE_VERSION}
 ARG UPSTREAM_URL
 ARG UPSTREAM_JQ
 ARG FREEBSD_ARCH=amd64
-ARG PACKAGES="FreeBSD-ssh devel/git-lfs"
+ARG PACKAGES="FreeBSD-ssh devel/git-lfs shells/bash"
 ARG HEALTHCHECK_ENDPOINT="http://localhost:3000/api/healthz"
 
 ENV HEALTHCHECK_URL="${HEALTHCHECK_ENDPOINT}"

@@ -7,6 +7,6 @@ export FORGEJO_CUSTOM=/config/custom
 
 cd $HOME
 # Fix for Git hooks
-ln -sf /bin/sh /bin/bash
+#ln -sf /bin/sh /bin/bash
 
 exec /usr/local/bin/s6-setuidgid bsd /usr/local/sbin/forgejo web --config /config/custom/conf/app.ini

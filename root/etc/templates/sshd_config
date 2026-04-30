@@ -33,7 +33,7 @@ ChallengeResponseAuthentication no
 PasswordAuthentication no
 PermitEmptyPasswords no
 
-AllowUsers ${USER}
+AllowUsers ${USER} git
 
 Banner none
 Subsystem sftp /usr/lib/ssh/sftp-server
