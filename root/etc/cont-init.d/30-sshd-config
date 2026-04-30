@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 # Setup git user with the same UID:GID as the bsd user so that we can
 # use git as the username in clone URLs
@@ -25,43 +25,43 @@ if [ ! -f /config/ssh/ssh_host_ecdsa_key ]; then
 fi
 
 if [ -e /config/ssh/ssh_host_ed25519_cert ]; then
-  SSH_ED25519_CERT=${SSH_ED25519_CERT:-"/config/ssh/ssh_host_ed25519_cert"}; export SSH_ED25519_CERT
+  SSH_ED25519_CERT=${SSH_ED25519_CERT:-"/config/ssh/ssh_host_ed25519_cert"}
 fi
 
 if [ -e /config/ssh/ssh_host_rsa_cert ]; then
-  SSH_RSA_CERT=${SSH_RSA_CERT:-"/config/ssh/ssh_host_rsa_cert"}; export SSH_RSA_CERT
+  SSH_RSA_CERT=${SSH_RSA_CERT:-"/config/ssh/ssh_host_rsa_cert"}
 fi
 
 if [ -e /config/ssh/ssh_host_ecdsa_cert ]; then
-  SSH_ECDSA_CERT=${SSH_ECDSA_CERT:-"/config/ssh/ssh_host_ecdsa_cert"}; export SSH_ECDSA_CERT
+  SSH_ECDSA_CERT=${SSH_ECDSA_CERT:-"/config/ssh/ssh_host_ecdsa_cert"}
 fi
 
 # In case someone wants to sign the `{keyname}.pub` key by `ssh-keygen -s ca -I identity ...` to
 # make use of the ssh-key certificate authority feature (see ssh-keygen CERTIFICATES section),
 # the generated key file name is `{keyname}-cert.pub`
 if [ -e /config/ssh/ssh_host_ed25519_key-cert.pub ]; then
-  SSH_ED25519_CERT=${SSH_ED25519_CERT:-"/config/ssh/ssh_host_ed25519_key-cert.pub"}; export SSH_ED25519_CERT
+  SSH_ED25519_CERT=${SSH_ED25519_CERT:-"/config/ssh/ssh_host_ed25519_key-cert.pub"}
 fi
 
 if [ -e /config/ssh/ssh_host_rsa_key-cert.pub ]; then
-  SSH_RSA_CERT=${SSH_RSA_CERT:-"/config/ssh/ssh_host_rsa_key-cert.pub"}; export SSH_RSA_CERT
+  SSH_RSA_CERT=${SSH_RSA_CERT:-"/config/ssh/ssh_host_rsa_key-cert.pub"}
 fi
 
 if [ -e /config/ssh/ssh_host_ecdsa_key-cert.pub ]; then
-  SSH_ECDSA_CERT=${SSH_ECDSA_CERT:-"/config/ssh/ssh_host_ecdsa_key-cert.pub"}; export SSH_ECDSA_CERT
+  SSH_ECDSA_CERT=${SSH_ECDSA_CERT:-"/config/ssh/ssh_host_ecdsa_key-cert.pub"}
 fi
 
 if [ -d /etc/ssh ]; then
-    USER=${USER:-"bsd"}; export USER &&  \
-    SSH_PORT=${SSH_PORT:-"22"}; export SSH_PORT && \
-    SSH_LISTEN_PORT=${SSH_LISTEN_PORT:-"${SSH_PORT}"}; export SSH_LISTEN_PORT && \
-    SSH_ED25519_CERT="${SSH_ED25519_CERT:+"HostCertificate "}${SSH_ED25519_CERT}"; export SSH_ED25519_CERT && \
-    SSH_RSA_CERT="${SSH_RSA_CERT:+"HostCertificate "}${SSH_RSA_CERT}"; export SSH_RSA_CERT && \
-    SSH_ECDSA_CERT="${SSH_ECDSA_CERT:+"HostCertificate "}${SSH_ECDSA_CERT}"; export SSH_ECDSA_CERT && \
-    SSH_MAX_STARTUPS="${SSH_MAX_STARTUPS:+"MaxStartups "}${SSH_MAX_STARTUPS}"; export SSH_MAX_STARTUPS && \
-    SSH_MAX_SESSIONS="${SSH_MAX_SESSIONS:+"MaxSessions "}${SSH_MAX_SESSIONS}"; export SSH_MAX_SESSIONS && \
-    SSH_INCLUDE_FILE="${SSH_INCLUDE_FILE:+"Include "}${SSH_INCLUDE_FILE}"; export SSH_INCLUDE_FILE && \
-    SSH_LOG_LEVEL=${SSH_LOG_LEVEL:-"INFO"}; export SSH_LOG_LEVEL && \
+    USER=${USER:-"bsd"} \
+    SSH_PORT=${SSH_PORT:-"22"} \
+    SSH_LISTEN_PORT=${SSH_LISTEN_PORT:-"${SSH_PORT}"} \
+    SSH_ED25519_CERT="${SSH_ED25519_CERT:+"HostCertificate "}${SSH_ED25519_CERT}" \
+    SSH_RSA_CERT="${SSH_RSA_CERT:+"HostCertificate "}${SSH_RSA_CERT}" \
+    SSH_ECDSA_CERT="${SSH_ECDSA_CERT:+"HostCertificate "}${SSH_ECDSA_CERT}" \
+    SSH_MAX_STARTUPS="${SSH_MAX_STARTUPS:+"MaxStartups "}${SSH_MAX_STARTUPS}" \
+    SSH_MAX_SESSIONS="${SSH_MAX_SESSIONS:+"MaxSessions "}${SSH_MAX_SESSIONS}" \
+    SSH_INCLUDE_FILE="${SSH_INCLUDE_FILE:+"Include "}${SSH_INCLUDE_FILE}" \
+    SSH_LOG_LEVEL=${SSH_LOG_LEVEL:-"INFO"} \
     /usr/local/bin/envsubst < /etc/templates/sshd_config > /etc/ssh/sshd_config
 
     chmod 0644 /etc/ssh/sshd_config
