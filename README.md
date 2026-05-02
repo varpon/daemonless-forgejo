@@ -22,10 +22,10 @@ Forgejo is a self-hosted lightweight software forge
 | Tag | Description | Best For |
 | :--- | :--- | :--- |
 | `15` / `lts` | Built from latest upstream source release of the v15 branch. | Alternative build. |
-| `15-latest` / `lts-latest` | Built from latest upstream source release of the v15 branch with latest FreeBSD packages. | Alternative build. |
+| `15-latest` / `lts-latest` | Built from latest upstream source release of the v15 branch with latest FreeBSD packages. | Most users. Matches Linux Docker behavior. |
 | `11` | Built from latest upstream source release of the v11 branch. | Alternative build. |
 | `latest` | Built from latest upstream source release. | Alternative build. |
-| `lts-pkg` | **FreeBSD Quarterly**. Uses stable, tested packages. | Most users. Matches Linux Docker behavior. |
+| `lts-pkg` | **FreeBSD Quarterly**. Uses stable, tested packages. | Production stability. |
 | `lts-pkg-latest` | **FreeBSD Latest**. Rolling package updates. | Newest FreeBSD packages. |
 | `pkg` | **FreeBSD Quarterly**. Uses stable, tested packages. | Production stability. |
 | `pkg-latest` | **FreeBSD Latest**. Rolling package updates. | Newest FreeBSD packages. |
@@ -51,8 +51,8 @@ services:
     volumes:
       - "/path/to/containers/forgejo:/config"
     ports:
-      - 3000:3000
-      - 2222:2222
+      - 3000:3001
+      - 2222:22
     restart: unless-stopped
 ```
 
@@ -60,8 +60,8 @@ services:
 
 ```bash
 podman run -d --name forgejo \
-  -p 3000:3000 \
-  -p 2222:2222 \
+  -p 3000:3001 \
+  -p 2222:22 \
   -e PUID=1000 \
   -e PGID=1000 \
   -e TZ=UTC \
@@ -85,8 +85,8 @@ podman run -d --name forgejo \
       TZ: "UTC"
       SSH_PORT: "22"
     ports:
-      - "3000:3000"
-      - "2222:2222"
+      - "3000:3001"
+      - "2222:22"
     volumes:
       - "/path/to/containers/forgejo:/config"
 ```
@@ -112,8 +112,8 @@ podman run -d --name forgejo \
 
 | Port | Protocol | Description |
 |------|----------|-------------|
-| `3000` | TCP | Web UI |
-| `2222` | TCP |  |
+| `3001` | TCP | Web UI |
+| `22` | TCP | SSH port |
 
 **Architectures:** amd64
 **User:** `bsd` (UID/GID via PUID/PGID, defaults to 1000:1000)

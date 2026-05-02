@@ -17,6 +17,7 @@ build:
       aliases: ["lts"]
     - tag: 15-latest
       tag_desc: Built from latest upstream source release of the v15 branch with latest FreeBSD packages.
+      default: true
       args:
         BASE_VERSION: "15-latest"
         UPSTREAM_URL: "https://codeberg.org/api/v1/repos/forgejo/forgejo/releases"
@@ -33,7 +34,6 @@ build:
     - tag: latest
       tag_desc: Built from latest upstream source release.
     - tag: lts-pkg
-      default: true
       pkg_name: forgejo-lts
       containerfile: Containerfile.pkg
     - tag: lts-pkg-latest

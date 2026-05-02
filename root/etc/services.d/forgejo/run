@@ -5,8 +5,5 @@ export HOME=/config
 export FORGEJO_WORK_DIR=/config
 export FORGEJO_CUSTOM=/config/custom
 
-cd $HOME
-# Fix for Git hooks
-#ln -sf /bin/sh /bin/bash
-
-exec /usr/local/bin/s6-setuidgid bsd /app/forgejo web --config /config/custom/conf/app.ini
+exec 2>&1
+exec /usr/local/bin/s6-notifyoncheck -c /healthz /usr/local/bin/s6-setuidgid bsd cd $HOME /app/forgejo web --config /config/custom/conf/app.ini

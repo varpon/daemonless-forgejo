@@ -77,7 +77,7 @@ RUN chmod +x /etc/services.d/*/run /etc/cont-init.d/* 2>/dev/null || true
 
 # --- Expose (Injected by Generator) ---
 {%- if ports %}
-EXPOSE {{ ports | map(attribute='port') | join(' ') }}
+EXPOSE {{ ports | map(attribute='target') | join(' ') }}
 {%- endif %}
 
 # --- Volumes (Injected by Generator) ---

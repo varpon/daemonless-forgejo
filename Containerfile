@@ -104,13 +104,13 @@ RUN cat /tmp/version | sed -n 's/^v\(.*\)$/\1/p' > /app/version && \
 COPY root/ /
 
 # Remove run.pkg file
-RUN rm -f /etc/services/forgejo/run.pkg 2>/dev/null || true
+RUN rm -f /etc/services.d/forgejo/run.pkg 2>/dev/null || true
 
 # Make scripts executable
 RUN chmod +x /etc/services.d/*/run /etc/cont-init.d/* 2>/dev/null || true
 
 # --- Expose (Injected by Generator) ---
-EXPOSE 3000 2222
+EXPOSE 3001 22
 
 # --- Volumes (Injected by Generator) ---
 VOLUME /config
